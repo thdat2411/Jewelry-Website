@@ -1,0 +1,11 @@
+.item-slick1:nth-child(1) {
+    background-image: url(images/main-banner1.jpg);
+}
+
+.item-slick1:nth-child(2) {
+    background-image: url(images/main-banner2.jpg);
+}
+
+.item-slick1:nth-child(3) {
+    background-image: url(images/main-banner3.jpg);
+}

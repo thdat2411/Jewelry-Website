@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+	<head th:replace="~{fragments::head}"></head>
+	<body class="animsition">
+		<!-- Header -->
+		<header th:replace="~{fragments::header}"></header>
+
+		<!-- Cart -->
+		<div th:replace="~{fragments::cart}"></div>
+
+		<!-- breadcrumb -->
+		<div class="container">
+			<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+				<a th:href="@{/home}" class="stext-109 cl8 hov-cl1 trans-04">
+					Home
+					<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+				</a>
+
+				<span class="stext-109 cl4"> Order </span>
+			</div>
+		</div>
+		<!-- Shoping Cart -->
+		<div class="bg0 p-t-75 p-b-85">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+						<div class="m-l-25 m-r--38 m-lr-0-xl">
+							<div class="wrap-table-shopping-cart">
+								<div th:if="${success}" class="text-center alert alert-success">
+									<p th:text="${success}"></p>
+								</div>
+								<p class="text-center" th:if="${check}">
+									<i class="text-info font-weight-bold text-center"></i> You do not have any order
+									yet!
+								</p>
+								<div th:if="${valid}">
+									<table class="table-order">
+										<tr class="table_head">
+											<th class="column-1">OrderDate</th>
+											<th class="column-2">DeliveryDate</th>
+											<th class="column-3">OrderStatus</th>
+											<th class="column-4">Quantity</th>
+											<th class="column-5">Total</th>
+											<th class="column-6">Payment Method</th>
+											<th class="column-7"></th>
+											<th class="column-8"></th>
+										</tr>
+										<div th:each="order:${orders}">
+											<tr class="table_row">
+												<td class="column-1" th:text="${order.orderDate}"></td>
+												<td
+													class="column-2"
+													th:text="${order.orderDeliveryDate==null?'Waiting':order.orderDeliveryDate}"
+												></td>
+												<td class="column-3" th:text="${order.orderStatus}"></td>
+												<td class="column-4" th:text="${order.orderQuantity}"></td>
+												<td class="column-5" th:text="'$'+${order.orderPrice}"></td>
+												<td class="column-6" th:text="${order.paymentMethod}"></td>
+												<td>
+													<a class="column-7" th:href="@{/cancel-order/(id = ${order.orderId})}"
+														>Cancel</a
+													>
+												</td>
+												<td>
+													<a class="column-8" th:href="@{/order-view/{id}(id=${order.orderId})}"
+														>View</a
+													>
+												</td>
+											</tr>
+										</div>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer th:replace="~{fragments::footer}"></footer>
+
+		<!-- Back to top -->
+		<div class="btn-back-to-top" id="myBtn">
+			<span class="symbol-btn-back-to-top">
+				<i class="zmdi zmdi-chevron-up"></i>
+			</span>
+		</div>
+
+		<div th:replace="~{fragments::script}"></div>
+	</body>
+</html>
